@@ -1,3 +1,4 @@
+//= require spree/backend
 //= require spree/backend/spree_cms/lib/underscore
 //= require spree/backend/spree_cms/lib/eventable
 //= require spree/backend/spree_cms/uploader
