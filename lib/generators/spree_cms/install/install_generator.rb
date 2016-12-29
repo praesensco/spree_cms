@@ -15,12 +15,25 @@ module SpreeCms
           "//= require spree/backend/spree_cms/initialize",
           ""
         ]
-        append_file 'vendor/assets/javascripts/spree/backend/all.js', js_requires.join("\n")
+        # append_file 'vendor/assets/javascripts/spree/backend/all.js', js_requires.join("\n")
+
+        puts 'Add manually the following lines to vendor/assets/javascripts/spree/backend/all.js'
+        js_requires.each do |req|
+          puts req.to_s
+        end
       end
 
       def add_stylesheets
-        inject_into_file 'vendor/assets/stylesheets/spree/frontend/all.css', " *= require spree/frontend/spree_cms\n", before: /\*\//, verbose: true
-        inject_into_file 'vendor/assets/stylesheets/spree/backend/all.css', " *= require spree/backend/spree_cms\n", before: /\*\//, verbose: true
+        puts 'Add manually the following lines to vendor/assets/stylesheets/spree/frontend/all.css'
+        puts " *= require spree/frontend/spree_cms"
+        puts ''
+
+        puts 'Add manually the following lines to vendor/assets/stylesheets/spree/backend/all.css'
+        puts " *= require spree/backend/spree_cms"
+        puts ''
+
+        # inject_into_file 'vendor/assets/stylesheets/spree/frontend/all.css', " *= require spree/frontend/spree_cms\n", before: /\*\//, verbose: true
+        # inject_into_file 'vendor/assets/stylesheets/spree/backend/all.css', " *= require spree/backend/spree_cms\n", before: /\*\//, verbose: true
       end
 
       def add_migrations
