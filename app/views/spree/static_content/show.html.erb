@@ -1,0 +1,17 @@
+<% content_for :head do -%>
+  <%- if @page.meta_title.present? -%>
+    <meta name="title" content="<%= @page.meta_title %>">
+  <%- else -%>
+    <meta name="title" content="<%= @page.title %>">
+  <%- end -%>
+  <meta name="keywords" content="<%= @page.meta_keywords %>">
+  <meta name="description" content="<%= @page.meta_description %>">
+<% end -%>
+
+<% if partial_exists "spree/static_content/#{@page.layout}" %>
+  <%= render "spree/static_content/#{@page.layout}" %>
+<% else %>
+  <% @page.body.to_a.each_with_index do |block, index| %>
+    <%= render block %>
+  <% end %>
+<% end %>
