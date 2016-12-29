@@ -15,7 +15,7 @@ module SpreeCms
           "//= require spree/backend/spree_cms/initialize",
           ""
         ]
-        inject_into_file 'vendor/assets/javascripts/spree/backend/all.js', js_requires.join("\n"), after: /spree\/backend\n/, verbose: true
+        append_file 'vendor/assets/javascripts/spree/backend/all.js', js_requires.join("\n")
       end
 
       def add_stylesheets

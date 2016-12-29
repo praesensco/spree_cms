@@ -1,9 +1,7 @@
 require 'spree_core'
 require 'spree_cms/engine'
 require 'spree_cms/version'
-require 'coffee_script'
-require 'sass/rails'
-require 'spree_cms/railtie'
+require 'spree_cms/railtie' if defined?(Rails)
 
 module StaticPage
   module_function
