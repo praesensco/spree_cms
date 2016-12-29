@@ -1,8 +1,9 @@
-source 'https://rubygems.org/'
+source 'https://rubygems.org'
 
-# Use Sir Trevor as rich content editor
+gem 'spree', github: 'spree/spree', branch: '3-1-stable'
+# Provides basic authentication functionality for testing parts of your engine
+gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '3-1-stable'
+
 gem 'sir_trevor_rails'
-
-gem 'spree', github: 'spree/spree', branch: 'master'
 
 gemspec
