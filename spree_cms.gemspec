@@ -18,4 +18,5 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency 'spree_core', '>= 3.1.0', '< 4.0'
+  spec.add_dependency 'sir_trevor_rails'
 end
