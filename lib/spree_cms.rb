@@ -1,6 +1,7 @@
 require 'spree_core'
 require 'spree_cms/engine'
 require 'spree_cms/railtie'
+require 'sir_trevor_rails'
 
 module StaticPage
   module_function
