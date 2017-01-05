@@ -16,10 +16,10 @@ $(document).ready(function() {
   if (layout === 'home-page') {
     sirTrevorDefaults = $.extend(sirTrevorDefaults, {
       blockTypes: [
-        'Hero', 'Banners'
+        'Hero', 'Banners', 'ShopByCategory'
       ]
     });
   }
-  
+
   new SirTrevor.Editor(sirTrevorDefaults);
 });

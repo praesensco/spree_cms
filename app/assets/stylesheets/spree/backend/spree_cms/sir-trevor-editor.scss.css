@@ -1,0 +1,336 @@
+$st-error-color: #d70014;
+$st-error-input-bg-color: #e8baba;
+$base-black: #333333;
+$ff_icon: 'foundation-icons';
+
+@mixin edit-icon($fontcode, $left, $size, $color) {
+  position: absolute;
+  bottom: 0;
+  width: $size;
+  height: $size;
+  text-indent: -9999px;
+  left: $left;
+  font-family: $ff_icon;
+  font-size: ($size - 10);
+  line-height: 1em;
+  color: #333333;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 100;
+  border-radius: 0;
+  padding:0px;
+  &:before{
+    content: $fontcode;
+    position: relative;
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    text-indent: 0;
+    position: absolute;
+    left: 0px;
+    display: inline-block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.st-text-block,
+.st-text-block:active,
+.st-text-block:focus,
+.st-block [contenteditable="true"],
+.st-block [contenteditable="true"]:active,
+.st-block [contenteditable="true"]:focus,
+.st-block input[type="text"],
+.st-block input[type="text"]:active,
+.st-block input[type="text"]:focus,
+.st-block textarea,
+.st-block textarea:hover,
+.st-block textarea:active {
+  padding: 1em;
+  border: 1px solid #e0e0e0;
+  box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 1px;
+
+  &.st-error {
+    background-color: grey;
+    border: 2px solid grey;
+  }
+}
+
+.st-block__input--stretch {
+  width: 100%;
+}
+
+// Editor overrides
+.st-block__editor--override {
+  margin-bottom: 15px;
+  position: relative;
+  & > img {
+    display: none;
+    &:first-of-type{
+      display: block;
+    }
+  }
+  .st-block__upload-container{
+    position: absolute;
+    top:0px;
+    left:0px;
+    height: 30px;
+    width:30px;
+    margin: 0px;
+    input {
+      position: absolute;
+      bottom: 0;
+      width: 30px;
+      height: 30px;
+      left: 0px;
+      color: #333333;
+      z-index: 101;
+      cursor: pointer;
+      padding: 0;
+    }
+    .st-upload-btn {
+      @include edit-icon("\f20c", 0px, 30px, $base-black);
+    }
+  }
+}
+
+.st-text-block--override {
+  color: #5498da;
+  font-size: 13px;
+}
+
+.st-block_editor--row {
+  margin-bottom:15px;
+  .st-input-split {
+      width:48%;
+      &:first-child {
+        margin-right:3%;
+      }
+  }
+  .st-input-full {
+    width: 100%;
+    margin-top: 21px;
+  }
+  h6{
+    text-align:center;
+  }
+  select {
+    margin: 0 11px 0 9px;
+  }
+  textarea {
+    display:block;
+    width:100%;
+    height:100px;
+  }
+}
+.st-block_inputs--row {
+  text-align:center;
+  .st-block_inputs--error {
+    display:none;
+    color:red;
+    text-align:center;
+    &.error{
+      display:block;
+    }
+  }
+  input.st-block__slidecount-input {
+    text-align: center;
+    width: 80%;
+    display: block;
+    margin: 0.4em auto 0;
+  }
+}
+.st-block__editor--title{
+  display:block;
+  text-align:center;
+  text-transform: capitalize;
+}
+//
+// .st-block__editor-grid {
+//   display: block;
+//   font-size: 0;
+.st-block__editor-grid-add {
+  width: 10%;
+  box-sizing: border-box;
+  margin: 10px 1.5% 20px;
+  display: inline-block;
+  padding-bottom: 5%;
+  background: #cccccc;
+  position: relative;
+  overflow: hidden;
+  background:white !important;
+  border: 1px solid #cccccc;
+  cursor: pointer;
+
+  img {
+    width: auto;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    margin: 0;
+    z-index: 98;
+    &:first-of-type {
+      z-index: 99;
+    }
+  }
+
+  &:before, &:after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -15px;
+    height: 30px;
+    width: 3px;
+    transform: rotate(-90deg);
+    background: #cccccc;
+  }
+  &:after{
+    transform: rotate(0deg);
+  }
+}
+
+.st-devare-btn {
+
+}
+
+//     .st-block__upload-container {
+//       margin: 0;
+//       position: absolute;
+//       width: 100%;
+//       height: 100%;
+//       input {
+//         position: absolute;
+//         bottom: 0;
+//         width: 30px;
+//         height: 30px;
+//         left: 60px;
+//         color: #333333;
+//         z-index: 101;
+//         cursor: pointer;
+//         padding: 0;
+//       }
+//     }
+//     .st-upload-btn {
+//       @include edit-icon("\f20c", 60px, 30px, $base-black);
+//     }
+//     .st-delete-btn{
+//       @include edit-icon("\f204", 0px, 30px, $base-black);
+//     }
+//     .st-edit-btn {
+//       @include edit-icon("\f184", 30px, 30px, $base-black);
+//     }
+//   }
+//   .sortable-placeholder {
+//     outline: 1px solid #cccccc;
+//     width: 30%;
+//     box-sizing: border-box;
+//     margin: 10px 1.5%;
+//     display: inline-block;
+//     padding-bottom: 30%;
+//   }
+//
+//   .st-block__editor-grid-item--video {
+//     padding-bottom: (9/16) * 30%;
+//     cursor: move;
+//     > iframe {
+//       position: absolute;
+//       top: 0;
+//       left: 0;
+//       width: 100%;
+//       height: 100%;
+//       border: 0;
+//       // disable so it can be draggable
+//       pointer-events: none;
+//     }
+//     input {
+//       position: absolute;
+//     }
+//   }
+// }
+//
+// .st-block__editor-grid--video {
+//   .sortable-placeholder,
+//   .st-block__editor-grid-add {
+//     padding-bottom: (9/16) * 30%;
+//   }
+// }
+//
+//
+// }
+// .sir-trevor__content-block--sharing{
+//   border: 1px solid #ccc;
+//   h6{
+//     text-align: center;
+//     text-transform: uppercase;
+//     margin-top: 15px;
+//   }
+// }
+// .st-block__ui-modal {
+//   position: absolute;
+//   top: 0px;
+//   left: 0px;
+//   height: 100%;
+//   width: 100%;
+//   background: rgba(255, 255, 255, 0.8);
+//   opacity: 0;
+//   transition: opacity 0.5s cubic-bezier(0.115, 0.605, 0.010, 0.930);
+//   visibility: hidden;
+//   z-index: 101;
+//   .st-block__ui-modal-inner {
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//     background: white;
+//     padding: 50px;
+//     input {
+//       width: 100%;
+//       margin-bottom: 15px;
+//     }
+//     select {
+//       width: 100%;
+//       margin-bottom: 15px;
+//     }
+//     button {
+//       display: block;
+//       margin: 0 auto;
+//       padding: 8px 40px;
+//     }
+.st-block__ui-modal-close {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  text-indent: -9999px;
+  height: 30px;
+  width: 30px;
+   &:before, &:after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -15px;
+    height: 30px;
+    width: 1px;
+    transform: rotate(-45deg);
+    background: #BC4E5B;
+  }
+  &:after{
+    transform: rotate(45deg);
+  }
+}
+//     }
+//   }
+//   &.open{
+//     opacity: 1;
+//     visibility: visible;
+//   }
+//
+// }
