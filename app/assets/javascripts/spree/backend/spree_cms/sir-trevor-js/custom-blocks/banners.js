@@ -74,6 +74,13 @@ SirTrevor.Blocks.Banners = SirTrevor.Block.extend({
     SpreeCmsUploader.bindUploaders(this);
   },
 
+  onBlockRender: function() {
+    var state = this.$editor.find("input[name='state']").val();
+    if (typeof state === 'undefined' || state != 'edited') {
+      this.loadData({});
+    }
+  },
+
   addCircleSlide: function() {
     var _this = this;
     var $editor = this.$editor;
