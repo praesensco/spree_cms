@@ -22,6 +22,7 @@ Utils = {
         activeIndex = elementIndex;
       }
     });
+    
     return activeIndex + 1;
   }
 };

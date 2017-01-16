@@ -2,46 +2,53 @@ SirTrevor.Blocks.Banners = SirTrevor.Block.extend({
   type: 'banners',
   title: 'Banners',
   blockHtml: _.template([
-    '<h2 class="st-block__editor--title">Banners</h2>',
-    '<h3>Circle elements</h3>',
-    '<div class="sst__grid" data-grid-type="circles">',
-    '<% if (data.circles) { %>',
-      '<% _.each(data.circles, function( element, index ){ %>',
-        '<%= itemCircleTemplate({ data: { element: element, index: index, images: data.images } }) %>',
-      '<% }); %>',
-    '<% } %>',
-    '<div class="st-block__editor-grid-add sst--circle"></div>',
-    '</div>',
-
-    '<h3>Box elements</h3>',
-    '<div class="sst__grid" data-grid-type="boxes">',
-    '<% if (data.circles) { %>',
-      '<% _.each(data.boxes, function( element, index ){ %>',
-        '<%= itemBoxTemplate({ data: { element: element, index: index, images: data.images } }) %>',
-      '<% }); %>',
-    '<% } %>',
-    '<div class="st-block__editor-grid-add sst--box"></div>',
-    '</div>',
-
-    '<input class="js-state" type="hidden" name="state" value="<%- state || "" %>">',
+    '<div class="row">',
+      '<h2 class="sst__title">Banners</h2>',
+      '<input class="js-state" type="hidden" name="state" value="<%- state || "" %>">',
+    '</div><div class="row">',
+      '<div class="sst__subtitle">Circle elements</div>',
+      '<div class="sst__grid" data-grid-type="circles">',
+        '<% if (data.circles) { %>',
+          '<% _.each(data.circles, function( element, index ){ %>',
+            '<%= itemCircleTemplate({ data: { element: element, index: index, images: data.images } }) %>',
+          '<% }); %>',
+        '<% } %>',
+        '<div class="st-block__editor-grid-add sst--circle"></div>',
+      '</div>',
+    '</div><div class="row">',
+      '<div class="sst__subtitle">Box elements</div>',
+      '<div class="sst__grid" data-grid-type="boxes">',
+        '<% if (data.boxes) { %>',
+          '<% _.each(data.boxes, function( element, index ){ %>',
+            '<%= itemBoxTemplate({ data: { element: element, index: index, images: data.images } }) %>',
+          '<% }); %>',
+        '<% } %>',
+        '<div class="st-block__editor-grid-add sst--box"></div>',
+        '</div>',
     '</div>'
   ].join("\n")),
   itemCircleHtml: _.template([
-    '<div class="sst__grid__element sst__grid__element--circle" draggable="true" data-index="<%- data.index || 0 %>">',
-    SpreeCmsUploader.getHtmlTemplate('image_circle', '', 'circles'),
-    '<input class="st-block__ui-modal-input js-sst-value" type="text" placeholder="CTA" name="cta" value="<%- data.element ? (data.element.cta || "") : "" %>" />',
-    '<input class="st-block__ui-modal-input js-sst-value" type="text" placeholder="URL" name="url" value="<%- data.element ? (data.element.url || "") : "" %>" />',
-    '<a title="Remove Slide" href="#" class="st-devare-btn">Remove Slide</a>',
-
+    '<div class="row sst__grid__element sst__grid__element--circle" draggable="true" data-index="<%- data.index || 0 %>">',
+      '<div class="col-md-6">',
+      SpreeCmsUploader.getHtmlTemplate('image_circle', '', 'circles'),
+      '</div><div class="col-md-6">',
+        '<div class="sst__subtitle">Parameters</div>',
+        SpreeCmsForm.getElementInputTemplate('cta', 'CTA'),
+        SpreeCmsForm.getElementInputTemplate('url', 'URL'),
+      '<a title="Remove Slide" href="#" class="st-devare-btn">Remove Slide</a>',
+      '</div>',
     '</div>'
   ].join("\n")),
   itemBoxHtml: _.template([
-    '<div class="sst__grid__element sst__grid__element--box" draggable="true" data-index="<%- data.index || 0 %>">',
-    SpreeCmsUploader.getHtmlTemplate('image_box', '', 'boxes'),
-    '<input class="st-block__ui-modal-input js-sst-value" type="text" placeholder="CTA" name="cta" value="<%- data.element ? (data.element.cta || "") : "" %>" />',
-    '<input class="st-block__ui-modal-input js-sst-value" type="text" placeholder="URL" name="url" value="<%- data.element ? (data.element.url || "") : "" %>" />',
-    '<input class="st-block__ui-modal-input js-sst-value" type="text" placeholder="Description" name="description" value="<%- data.element ? (data.element.description || "") : "" %>" />',
-    '<a title="Remove Slide" href="#" class="st-devare-btn">Remove Slide</a>',
+    '<div class="row sst__grid__element sst__grid__element--box" draggable="true" data-index="<%- data.index || 0 %>">',
+      '<div class="col-md-6">',
+      SpreeCmsUploader.getHtmlTemplate('image_box', '', 'boxes'),
+      '</div><div class="col-md-6">',
+        SpreeCmsForm.getElementInputTemplate('cta', 'CTA'),
+        SpreeCmsForm.getElementInputTemplate('url', 'URL'),
+        SpreeCmsForm.getElementInputTemplate('description', 'Description'),
+      '<a title="Remove Slide" href="#" class="st-devare-btn">Remove Slide</a>',
+      '</div>',
     '</div>'
   ].join("\n")),
   multiItemBlockOptions: {
@@ -77,10 +84,10 @@ SirTrevor.Blocks.Banners = SirTrevor.Block.extend({
       var $item;
       e.preventDefault();
 
-      $item = $(_this.itemCircleHtml({ data: {}, element: { index: activeIndex } }));
+      $item = $(_this.itemCircleHtml({ data: { index: activeIndex }, element: { index: activeIndex } }));
       _this.bindDevareSlide($item);
 
-      $(addButton).parent().prepend($item);
+      $(addButton).before($item);
       SpreeCmsUploader.bindUploaders(_this);
       $editor.find('.sortable').sortable('refresh');
       _this.multiItemBlockOptions.onItemAdded.call(_this, $item);
@@ -98,10 +105,10 @@ SirTrevor.Blocks.Banners = SirTrevor.Block.extend({
       var $item;
       e.preventDefault();
 
-      $item = $(_this.itemBoxHtml({ data: {}, element: { index: activeIndex } }));
+      $item = $(_this.itemBoxHtml({ data: { index: activeIndex }, element: { index: activeIndex } }));
       _this.bindDevareSlide($item);
 
-      $(addButton).parent().prepend($item);
+      $(addButton).before($item);
       SpreeCmsUploader.bindUploaders(_this);
       $editor.find('.sortable').sortable('refresh');
       _this.multiItemBlockOptions.onItemAdded.call(_this, $item);
@@ -123,7 +130,7 @@ SirTrevor.Blocks.Banners = SirTrevor.Block.extend({
     var $grid;
     var $gridElementParent;
 
-    this.$editor.find('.js-sst-value').each(function(_i, element) {
+    this.$editor.find('.js-scms-value').each(function(_i, element) {
       $element = jQuery(element);
       $gridElementParent = $element.parents('.sst__grid__element[data-index]');
       if ($gridElementParent.length) {
@@ -143,7 +150,6 @@ SirTrevor.Blocks.Banners = SirTrevor.Block.extend({
 
     dataObj.images = SpreeCmsUploader.gatherImages(this);
 
-    console.log('_serializeData', dataObj);
     this.setData(dataObj);
   }
 });
