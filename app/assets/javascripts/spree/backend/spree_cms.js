@@ -9,4 +9,5 @@
 //= require spree/backend/spree_cms/sir-trevor-js/custom-blocks/hero
 //= require spree/backend/spree_cms/sir-trevor-js/custom-blocks/banners
 //= require spree/backend/spree_cms/sir-trevor-js/custom-blocks/shop_by_category
+//= require spree/backend/spree_cms/sir-trevor-js/custom-blocks/editors_picks
 //= require spree/backend/spree_cms/initialize

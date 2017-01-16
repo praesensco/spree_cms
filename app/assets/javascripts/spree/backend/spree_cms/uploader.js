@@ -1,7 +1,7 @@
 var SpreeCms = SpreeCms || {};
 
 SpreeCms.uploader = function() {
-  var imageTypes = ['desktop', 'mobile'];
+  var imageTypes = ['desktop', 'mobile', 'icon'];
 
   var jsClass = 'js-uploader';
   var jsSelector = '.js-uploader';
@@ -10,7 +10,7 @@ SpreeCms.uploader = function() {
     var html;
     var useImages;
     if (useImagesRestrictedTo === false) {
-      useImages = imageTypes;
+      useImages = ['desktop', 'mobile'];
     } else {
       useImages = useImagesRestrictedTo;
     }
