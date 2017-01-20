@@ -1,3 +1,3 @@
 module SpreeCms
-  VERSION = "0.4.13"
+  VERSION = "0.9.1"
 end
