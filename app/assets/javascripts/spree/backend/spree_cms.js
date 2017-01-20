@@ -10,4 +10,5 @@
 //= require spree/backend/spree_cms/sir-trevor-js/custom-blocks/double_banners
 //= require spree/backend/spree_cms/sir-trevor-js/custom-blocks/shop_by_category
 //= require spree/backend/spree_cms/sir-trevor-js/custom-blocks/banner_row
+//= require spree/backend/spree_cms/sir-trevor-js/custom-blocks/plain
 //= require spree/backend/spree_cms/initialize
