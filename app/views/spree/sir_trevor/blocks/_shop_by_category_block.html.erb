@@ -3,7 +3,6 @@
   <ul class="shop-category__items">
     <%
       # TODO: change to custom category selection
-      binding.pry
     %>
     <% Spree::Taxonomy.includes(root: :children).find_by(name: Spree::Taxonomy::CATEGORY).root.children.each do |taxonomy| %>
       <li class="shop-category__item">
