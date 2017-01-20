@@ -1,7 +1,11 @@
 <div class="shop-category">
   <div class="heading--2 heading--mobile-shrink"><%=raw shop_by_category_block.heading.to_s %></div>
   <ul class="shop-category__items">
-    <% Spree::Taxonomy.includes(root: :children).find_by(name: 'Categories').root.children.each do |taxonomy| %>
+    <%
+      # TODO: change to custom category selection
+      binding.pry
+    %>
+    <% Spree::Taxonomy.includes(root: :children).find_by(name: Spree::Taxonomy::CATEGORY).root.children.each do |taxonomy| %>
       <li class="shop-category__item">
           <a href="<%= seo_url(taxonomy) %>">
             <div class="image">
