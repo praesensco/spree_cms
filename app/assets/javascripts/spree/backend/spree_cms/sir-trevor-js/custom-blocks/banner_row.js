@@ -1,10 +1,12 @@
-SirTrevor.Blocks.EditorsPicks = SirTrevor.Block.extend({
-  type: 'editors_picks',
-  title: 'EditorsPicks',
+SirTrevor.Blocks.BannerRow = SirTrevor.Block.extend({
+  type: 'banner_row',
+  title: 'Banner Row',
   blockHtml: _.template([
     '<div class="row">',
-      '<h2 class="sst__title">Editor\'s Picks</h2>',
+      '<h2 class="sst__title">Banner Row</h2>',
       '<input class="js-state" type="hidden" name="state" value="<%- state || "" %>">',
+      SpreeCmsForm.getInputTemplate('heading', 'Heading'),
+      SpreeCmsForm.getInputTemplate('description', 'Description'),
     '</div><div class="row">',
       '<div class="sst__subtitle">Elements</div>',
       '<div class="sst__grid" data-grid-type="items">',

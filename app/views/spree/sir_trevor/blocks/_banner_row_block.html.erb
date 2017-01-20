@@ -1,0 +1,23 @@
+<div class="edits">
+  <div class="edits__copy">
+    <div class="heading--2"><%=raw banner_row_block.heading %></div>
+    <div class="paragraph"><%=raw banner_row_block.description %></div>
+  </div>
+  <ul class="edits__items">
+    <% banner_row_block.items.each do |index, banner|
+      %><div class="edits__item">
+        <a href="<%=raw banner[:url] %>">
+          <div class="circle">
+            <img src="<%= cms_image(banner_row_block.images[:items][index][:desktop], :large) %>" class="is-loading">
+          </div>
+          <div class="avatar">
+            <img src="<%= cms_image(banner_row_block.images[:items][index][:icon], :small) %>" class="is-loading">
+          </div>
+          <div class="edits__caption">
+            <%=raw banner[:cta] %>
+          </div>
+        </a>
+      </div><%
+    end %>
+  </ul>
+</div>

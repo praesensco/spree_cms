@@ -16,7 +16,7 @@ $(document).ready(function() {
   if (layout === 'home-page') {
     sirTrevorDefaults = $.extend(sirTrevorDefaults, {
       blockTypes: [
-        'Hero', 'Banners', 'ShopByCategory', 'EditorsPicks'
+        'Hero', 'BannerRow', 'DoubleBanners', 'ShopByCategory'
       ]
     });
   }
