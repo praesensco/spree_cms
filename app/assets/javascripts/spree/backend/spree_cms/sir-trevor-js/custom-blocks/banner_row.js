@@ -7,6 +7,7 @@ SirTrevor.Blocks.BannerRow = SirTrevor.Block.extend({
       '<input class="js-state" type="hidden" name="state" value="<%- state || "" %>">',
       SpreeCmsForm.getInputTemplate('heading', 'Heading'),
       SpreeCmsForm.getInputTemplate('description', 'Description'),
+      SpreeCmsForm.getCheckboxTemplate('use_cta_icon', 'Use CTA Icons'),
     '</div><div class="row">',
       '<div class="sst__subtitle">Elements</div>',
       '<div class="sst__grid" data-grid-type="items">',
@@ -22,12 +23,12 @@ SirTrevor.Blocks.BannerRow = SirTrevor.Block.extend({
   itemHtml: _.template([
     '<div class="row sst__grid__element" draggable="true" data-index="<%- data.index || 0 %>">',
       '<div class="col-md-6">',
-      SpreeCmsUploader.getHtmlTemplate('image_item', '', 'items', ['desktop', 'mobile', 'icon']),
+      SpreeCmsUploader.getHtmlTemplate('image_item', '', 'items', ['image', 'icon']),
       '</div><div class="col-md-6">',
         '<div class="sst__subtitle">Parameters</div>',
         SpreeCmsForm.getElementInputTemplate('cta', 'CTA'),
         SpreeCmsForm.getElementInputTemplate('url', 'URL'),
-      '<a title="Remove Slide" href="#" class="st-devare-btn">Remove Slide</a>',
+      '<a title="Remove Element" href="#" class="st-devare-btn">Remove Element</a>',
       '</div>',
     '</div>'
   ].join("\n")),
@@ -108,7 +109,7 @@ SirTrevor.Blocks.BannerRow = SirTrevor.Block.extend({
         }
         dataObj[$grid.data('grid-type')][$gridElementParent.data('index')][$element.attr('name')] = $element.val();
       } else {
-        dataObj[element.getAttribute('name')] = element.value;
+        dataObj[element.getAttribute('name')] = SpreeCmsForm.readValue(element);
       }
     });
 

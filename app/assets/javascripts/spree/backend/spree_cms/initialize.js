@@ -1,22 +1,38 @@
 $(document).ready(function() {
   var $sirTrevorEditor = $('.js-st-instance');
+  if (!$sirTrevorEditor.length) {
+    return;
+  }
+
   var sirTrevorDefaults = { el: $sirTrevorEditor };
   var layout = $('#page_layout').val() || 'default';
-  var assetHost =  $sirTrevorEditor.parents('form:first').data('asset-host');
 
+  SirTrevor.assetHost = $sirTrevorEditor.parents('form:first').data('asset-host');
   SirTrevor.setDefaults({
     uploadUrl: '/admin/upload'
   });
 
-  SirTrevor.assetHost = assetHost;
-
-  if ($sirTrevorEditor.length <= 0) {
-    return;
-  }
   if (layout === 'home-page') {
     sirTrevorDefaults = $.extend(sirTrevorDefaults, {
       blockTypes: [
-        'Hero', 'BannerRow', 'DoubleBanners', 'ShopByCategory'
+        'BannerRow',
+        'DoubleBanners',
+        'Hero',
+        'Newsletter',
+        'ShopByCategory',
+        'TaxonProducts'
+      ]
+    });
+  } else {
+    sirTrevorDefaults = $.extend(sirTrevorDefaults, {
+      blockTypes: [
+        'BannerRow',
+        'DoubleBanners',
+        'Hero',
+        'Newsletter',
+        'Textarea',
+        'ShopByCategory',
+        'TaxonProducts'
       ]
     });
   }

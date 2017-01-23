@@ -1,7 +1,7 @@
 var SpreeCms = SpreeCms || {};
 
 SpreeCms.uploader = function() {
-  var imageTypes = ['desktop', 'mobile', 'icon'];
+  var imageTypes = ['image', 'desktop', 'mobile', 'icon'];
 
   var jsClass = 'js-uploader';
   var jsSelector = '.js-uploader';

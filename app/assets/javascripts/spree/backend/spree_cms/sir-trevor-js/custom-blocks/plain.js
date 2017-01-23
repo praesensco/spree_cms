@@ -10,7 +10,6 @@ SirTrevor.Blocks.Textarea = SirTrevor.Block.extend({
     '<div class="js-grid sortable st-block__editor-grid">',
     '</div>'
   ].join("\n")),
-
   loadData: function(data) {
     this.$editor
       .html(this.blockHtml({
@@ -30,8 +29,6 @@ SirTrevor.Blocks.Textarea = SirTrevor.Block.extend({
     var _this      = this;
     var state = _thisEditor.find("input[name='state']").val();
 
-    console.log('onBlockRender');
-
     if (typeof state === 'undefined' || state != 'edited') {
       dataObj = {
           global: {
@@ -40,7 +37,7 @@ SirTrevor.Blocks.Textarea = SirTrevor.Block.extend({
       _this.loadData(dataObj);
       // Hide the intial screen
       _thisInput.hide();
-    } else {
+    } else if (_thisInput) {
       _thisInput.find('.st-block_inputs--error').addClass('error');
     }
   },

@@ -1,22 +1,18 @@
-SirTrevor.Blocks.Hero = SirTrevor.Block.extend({
-  type: 'hero',
-  title: 'Hero',
+SirTrevor.Blocks.TaxonProducts = SirTrevor.Block.extend({
+  type: 'taxon_products',
+  title: 'Products by Taxon',
   blockHtml: _.template([
     '<div class="row">',
-      '<h2 class="sst__title">Hero</h2>',
+      '<h2 class="sst__title">Products by Taxon</h2>',
       '<div class="col-md-6">',
-        SpreeCmsUploader.getHtmlTemplate('background', "Background image"),
-      '</div><div class="col-md-6">',
-        '<div class="sst__subtitle">Parameters</div>',
-        SpreeCmsForm.getInputTemplate('cta', 'CTA'),
+        SpreeCmsUploader.getHtmlTemplate('heading_icon', "Icon", false, ['icon']),
         SpreeCmsForm.getInputTemplate('heading', 'Heading'),
-        SpreeCmsForm.getInputTemplate('url', 'URL'),
+        SpreeCmsForm.getInputTemplate('taxon_permalink', 'Taxon Path ie. "category/dresses"'),
       '</div>',
       '<input class="js-state" type="hidden" name="state" value="<%- state || "" %>">',
       '<input class="js-title" type="hidden" name="title" value="<%= data.title %>">',
-    '</div>',
+    '</div>'
   ].join("\n")),
-  uploadable: true,
   loadData: function(data) {
     var renderedHtml = this.blockHtml({
       data: data,
