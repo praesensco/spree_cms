@@ -13,6 +13,7 @@ SirTrevor.Blocks.TaxonProducts = SirTrevor.Block.extend({
       '<input class="js-title" type="hidden" name="title" value="<%= data.title %>">',
     '</div>'
   ].join("\n")),
+  uploadable: true,
   loadData: function(data) {
     var renderedHtml = this.blockHtml({
       data: data,
