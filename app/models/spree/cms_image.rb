@@ -26,7 +26,7 @@ module Spree
       attachment_definitions[:attachment][:s3_host_alias] = Rails.application.secrets.attachments_host || Rails.application.secrets.cdn_host
     else
       attachment_definitions[:attachment][:path] = "#{Rails.root.to_s}/public/media/cmsimage/:id/:style/:basename.:extension"
-      attachment_definitions[:attachment][:url] = "http://#{Rails.application.secrets.cdn_host}/media/cmsimage/:id/:style/:basename.:extension"
+      attachment_definitions[:attachment][:url] = "//#{Rails.application.secrets.cdn_host}/media/cmsimage/:id/:style/:basename.:extension"
     end
 
     def url(size)
