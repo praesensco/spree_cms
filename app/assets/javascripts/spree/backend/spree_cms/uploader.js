@@ -6,9 +6,13 @@ SpreeCms.uploader = function() {
   var jsClass = 'js-uploader';
   var jsSelector = '.js-uploader';
 
-  var getHtmlTemplate = function(name, title = '', gridType = false, useImagesRestrictedTo = false) {
+  var getHtmlTemplate = function(name, title, gridType, useImagesRestrictedTo) {
     var html;
     var useImages;
+    title = title || '';
+    gridType = gridType || false;
+    useImagesRestrictedTo = useImagesRestrictedTo || false;
+
     if (useImagesRestrictedTo === false) {
       useImages = ['desktop', 'mobile'];
     } else {
