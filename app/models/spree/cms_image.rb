@@ -11,7 +11,8 @@ module Spree
                           large: '1800x>',
                           medium: '900x>',
                           small: '500x>',
-                          mini: '200x>'
+                          mini: '200x>',
+                          icon: '50x>'
                         }
                       },
                       default_style: :normal,
