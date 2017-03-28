@@ -20,7 +20,6 @@ class Spree::Page < ActiveRecord::Base
   scope :by_store, ->(store) { joins(:stores).where('spree_pages_stores.store_id = ?', store) }
 
   before_save :update_positions_and_slug
-  before_save :remove_unused_assets
 
   def initialize(*args)
     super(*args)
@@ -33,30 +32,6 @@ class Spree::Page < ActiveRecord::Base
   end
 
   private
-
-  def remove_unused_assets
-    all_image_ids = image_ids
-    body.to_a.each do |block|
-      if !block.images.nil?
-        block.images.each do |key, images_by_type|
-          images_by_type.each do |image_type, image|
-            if image[:id].nil?
-              image.each do |image_element_type, image_element|
-                next if image_element[:id].blank?
-                all_image_ids -= [image_element[:id].to_i]
-              end
-            else
-              all_image_ids -= [image[:id].to_i]
-            end
-          end
-        end
-      end
-    end
-    
-    all_image_ids.each do |asset_id|
-      Spree::Asset.find(asset_id).delete
-    end
-  end
 
   def update_positions_and_slug
     # Ensure that all slugs start with a slash.
