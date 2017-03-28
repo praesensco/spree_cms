@@ -21,6 +21,14 @@ SpreeCms.form = function() {
             '</div></div>'].join('');
   }
 
+  var getTextareaTemplate = function(code, label) {
+    label = label || '';
+    return ['<div class="form-group">',
+            '<label>' + label + '</label>',
+            '<textarea class="form-control js-scms-value" rows="5" type="text" name="' + code + '"><%- data.' + code + ' || "" %></textarea>',
+            '</div>'].join('');
+  }
+
   var getElementInputTemplate = function(code, label) {
     label = label || '';
     return ['<div class="form-group">',
@@ -46,9 +54,10 @@ SpreeCms.form = function() {
   }
 
   return {
-    getElementInputTemplate: getElementInputTemplate,
     getCheckboxTemplate: getCheckboxTemplate,
+    getElementInputTemplate: getElementInputTemplate,
     getInputTemplate: getInputTemplate,
+    getTextareaTemplate: getTextareaTemplate,
     readValue: readValue
   }
 }

@@ -3128,12 +3128,13 @@ var paste_options = {
 };
 
 var upload_options = {
-  html: [
-    '<div class="st-block__upload-container">',
-    '<input type="file" type="st-file-upload">',
-    '<button class="st-upload-btn"><%= i18n.t("general:upload") %></button>',
-    '</div>'
-  ].join('\n')
+  html: '',
+  // [
+  //   '<div class="st-block__upload-container">',
+  //   '<input type="file" type="st-file-upload">',
+  //   '<button class="st-upload-btn"><%= i18n.t("general:upload") %></button>',
+  //   '</div>'
+  // ].join('\n')
 };
 
 config.defaults.Block = {
