@@ -48,9 +48,9 @@ SpreeCms.uploader = function() {
         html += '</td>';
         html += '<td class="sst__uploader__images__image" valign="top">';
         if (gridType == false) {
-            html += '<img style="width: 100%;" src="<% if (data && data.images && data.images.' + name + ' && data.images.' + name + '.' + imageType + ') { %><%= decodeURIComponent(data.images.' + name + '.' + imageType + '.url) %><% } %>" class="" />';
+            html += '<img src="<% if (data && data.images && data.images.' + name + ' && data.images.' + name + '.' + imageType + ') { %><%= decodeURIComponent(data.images.' + name + '.' + imageType + '.url) %><% } %>" class="" />';
         } else {
-            html += '<img style="width: 100%;" src="<% if (data && data.images && data.images.' + gridType + ' && data.images.' + gridType + '[data.index] && data.images.' + gridType + '[data.index].' + imageType + ') { %><%= decodeURIComponent(data.images.' + gridType + '[data.index].' + imageType + '.url) %><% } %>" />';
+            html += '<img src="<% if (data && data.images && data.images.' + gridType + ' && data.images.' + gridType + '[data.index] && data.images.' + gridType + '[data.index].' + imageType + ') { %><%= decodeURIComponent(data.images.' + gridType + '[data.index].' + imageType + '.url) %><% } %>" />';
         }
         html += '</td>';
         html += '</tr>';
