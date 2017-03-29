@@ -21,6 +21,21 @@ SpreeCms.form = function() {
             '</div></div>'].join('');
   }
 
+  var getSelectTemplate = function(code, label, options) {
+    label = label || '';
+    options = options || [{ label: 'Please select', value: '' }];
+    options_html = '';
+    jQuery(options).each(function(_i, option) {
+      options_html += '<option <% if (data.' + code + ' == "' + option.value + '") { %>selected="selected"<% } %> value="' + option.value + '">' + option.label + '</option>';
+    });
+    return ['<div class="form-group">',
+            '<label>' + label + '</label>',
+            '<select class="form-control js-scms-value" name="' + code + '">',
+            options_html,
+            '</select>',
+            '</div>'].join('');
+  }
+
   var getTextareaTemplate = function(code, label) {
     label = label || '';
     return ['<div class="form-group">',
@@ -57,6 +72,7 @@ SpreeCms.form = function() {
     getCheckboxTemplate: getCheckboxTemplate,
     getElementInputTemplate: getElementInputTemplate,
     getInputTemplate: getInputTemplate,
+    getSelectTemplate: getSelectTemplate,
     getTextareaTemplate: getTextareaTemplate,
     readValue: readValue
   }
