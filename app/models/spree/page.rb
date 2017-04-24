@@ -19,6 +19,15 @@ class Spree::Page < ActiveRecord::Base
 
   scope :by_store, ->(store) { joins(:stores).where('spree_pages_stores.store_id = ?', store) }
 
+  LAYOUTS = [
+    ['About','about'],
+    ['Home page','home-page'],
+    ['How it works', 'howitworks'],
+    ['Support', 'support'],
+    ['FAQ', 'faq'],
+    ['Contact', 'contact']
+  ]
+
   before_save :update_positions_and_slug
 
   def initialize(*args)
