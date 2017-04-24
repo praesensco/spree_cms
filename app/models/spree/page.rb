@@ -40,7 +40,21 @@ class Spree::Page < ActiveRecord::Base
     foreign_link.blank? ? slug : foreign_link
   end
 
+  def blocks(type = nil)
+    return body.to_a if type.nil?
+
+    body.to_a.select { |block| block_type? block, type }
+  end
+
   private
+
+  def block_type(block)
+    block.class.name.split('::').last
+  end
+
+  def block_type?(block, type)
+    block_type(block) == type
+  end
 
   def update_positions_and_slug
     # Ensure that all slugs start with a slash.
