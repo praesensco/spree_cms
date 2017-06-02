@@ -13,4 +13,5 @@
 //= require spree/backend/spree_cms/sir-trevor-js/custom-blocks/plain
 //= require spree/backend/spree_cms/sir-trevor-js/custom-blocks/shop_by_category
 //= require spree/backend/spree_cms/sir-trevor-js/custom-blocks/taxon_products
+//= require spree/backend/spree_cms/sir-trevor-js/custom-blocks/abstract
 //= require spree/backend/spree_cms/initialize
