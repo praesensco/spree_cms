@@ -2,19 +2,23 @@ module Spree
   module Admin
     class UploadController < Spree::Admin::BaseController
       def upload
-        remove_asset_id = params[:attachment][:remove]
+        render json: process_image_upload
+      end
 
-        page_id = params[:attachment][:page]
-        if !page_id.nil?
-          page = Spree::Page.find(page_id)
-          image = CmsImage.new(attachment: params[:attachment][:file])
-          image.save
+      private
+
+      def process_image_upload
+        page = Spree::Page.find_by(id: params[:attachment][:page])
+
+        if page.present?
+          image = CmsImage.create!(
+            file_type: params[:attachment][:block_type],
+            attachment: params[:attachment][:file]
+          )
           page.images.push(image)
           page.save
 
-          image.attachment.reprocess!
-
-          response = {
+          {
             success: true,
             file: {
               id: image.id,
@@ -23,12 +27,8 @@ module Spree
             }
           }
         else
-          response = {
-            success: false
-          }
+          { success: false }
         end
-
-        render json: response
       end
     end
   end

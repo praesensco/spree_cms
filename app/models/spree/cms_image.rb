@@ -3,17 +3,22 @@ module Spree
     include ActiveModel::AttributeMethods
 
     validate :no_attachment_errors
+
+    def self.styles_lambda(attachment)
+      {
+        retina: '2400x>',
+        large: '1800x>',
+        medium: '900x>',
+        small: '500x>',
+        mini: '200x>',
+        icon: '50x>'
+      }
+    end
+
     has_attached_file :attachment,
                       styles: lambda { |attachment|
                         # AssetType.from(attachment.instance_read(:content_type)).paperclip_styles
-                        {
-                          retina: '2400x>',
-                          large: '1800x>',
-                          medium: '900x>',
-                          small: '500x>',
-                          mini: '200x>',
-                          icon: '50x>'
-                        }
+                        attachment.instance.class.styles_lambda(attachment)
                       },
                       default_style: :normal,
                       convert_options: { all: '-strip -auto-orient -colorspace sRGB' }

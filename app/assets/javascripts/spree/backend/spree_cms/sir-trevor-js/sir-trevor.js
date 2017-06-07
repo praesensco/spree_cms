@@ -4647,6 +4647,7 @@ module.exports = function(block, file, success, error) {
   data.append('attachment[name]', file.name);
   data.append('attachment[file]', file);
   data.append('attachment[uid]', uid);
+  data.append('attachment[block_type]', block.type);
 
   block.resetMessages();
 
