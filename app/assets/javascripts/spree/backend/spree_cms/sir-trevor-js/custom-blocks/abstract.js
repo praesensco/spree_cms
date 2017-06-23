@@ -6,7 +6,7 @@ SirTrevor.Blocks.Abstract = SirTrevor.Block.extend({
   blockHtml: _.template([
     '<div class="row">',
       '<% if (header) { %><h2 class="sst__title"><%- header %></h2><% } %>',
-      '<div class="col-md-6">',
+      '<div class="col-md-12">',
       SpreeCmsForm.getInputTemplate('heading', 'Heading'),
       SpreeCmsForm.getTextareaTemplate('content', 'Content'),
       '</div>',
