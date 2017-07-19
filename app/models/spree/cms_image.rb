@@ -4,7 +4,7 @@ module Spree
 
     validate :no_attachment_errors
 
-    def self.styles_lambda(attachment)
+    def self.styles_lambda(_attachment)
       {
         retina: '2400x>',
         large: '1800x>',
@@ -16,13 +16,12 @@ module Spree
     end
 
     has_attached_file :attachment,
-                      styles: lambda { |attachment|
-                        # AssetType.from(attachment.instance_read(:content_type)).paperclip_styles
-                        attachment.instance.class.styles_lambda(attachment)
-                      },
+                      styles: lambda { |attachment| attachment.instance.class.styles_lambda(attachment) },
                       default_style: :normal,
-                      convert_options: { all: '-strip -auto-orient -colorspace sRGB' }
-    validates_attachment :attachment, presence: true, content_type: { content_type: %w(image/jpeg image/jpg image/png image/gif) }
+                      convert_options: { all: '-filter Triangle -define filter:support=2 -unsharp 0.25x0.08+8.3+0.045 -dither None -posterize 136 -quality 82 -define png:compression-filter=5 -define png:compression-level=9 -define png:compression-strategy=1 -define png:exclude-chunk=all -interlace none -colorspace sRGB' } # rubocop:disable Metrics/LineLength
+    validates_attachment :attachment, presence: true, content_type: {
+      content_type: %w[image/jpeg image/jpg image/png image/gif]
+    }
     after_post_process :find_dimensions
 
     if Rails.application.secrets.aws_s3_enabled
@@ -31,7 +30,7 @@ module Spree
       attachment_definitions[:attachment][:url] = ':s3_alias_url'
       attachment_definitions[:attachment][:s3_host_alias] = Rails.application.secrets.attachments_host || Rails.application.secrets.cdn_host
     else
-      attachment_definitions[:attachment][:path] = "#{Rails.root.to_s}/public/media/cmsimage/:id/:style/:basename.:extension"
+      attachment_definitions[:attachment][:path] = "#{Rails.root}/public/media/cmsimage/:id/:style/:basename.:extension"
       attachment_definitions[:attachment][:url] = "//#{Rails.application.secrets.cdn_host}/media/cmsimage/:id/:style/:basename.:extension"
     end
 
