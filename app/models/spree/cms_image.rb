@@ -16,9 +16,10 @@ module Spree
     end
 
     has_attached_file :attachment,
-                      styles: lambda { |attachment| attachment.instance.class.styles_lambda(attachment) },
+                      styles: ->(attachment) { attachment.instance.class.styles_lambda(attachment) },
                       default_style: :normal,
-                      convert_options: { all: '-filter Triangle -define filter:support=2 -unsharp 0.25x0.08+8.3+0.045 -dither None -posterize 136 -quality 82 -define png:compression-filter=5 -define png:compression-level=9 -define png:compression-strategy=1 -define png:exclude-chunk=all -interlace none -colorspace sRGB' } # rubocop:disable Metrics/LineLength
+                      convert_options: { all: '-strip -colorspace sRGB' },
+                      processors: %i[thumbnail paperclip_optimizer]
     validates_attachment :attachment, presence: true, content_type: {
       content_type: %w[image/jpeg image/jpg image/png image/gif]
     }
