@@ -2,8 +2,9 @@ SirTrevor.Blocks.BannerRow = SirTrevor.Block.extend({
   type: 'banner_row',
   title: 'Banner Row',
   blockHtml: _.template([
+
     '<div class="row">',
-      '<h2 class="sst__title">Banner Row</h2>',
+      '<div class="col-md-12"><h2>Banner Row</h2></div>',
       '<input class="js-state" type="hidden" name="state" value="<%- state || "" %>">',
       SpreeCmsForm.getInputTemplate('heading', 'Heading'),
       SpreeCmsForm.getInputTemplate('description', 'Description'),

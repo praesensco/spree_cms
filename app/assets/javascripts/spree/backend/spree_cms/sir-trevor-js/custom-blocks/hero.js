@@ -3,7 +3,7 @@ SirTrevor.Blocks.Hero = SirTrevor.Block.extend({
   title: 'Hero',
   blockHtml: _.template([
     '<div class="row">',
-      '<h2 class="sst__title">Hero</h2>',
+      '<div class="col-md-12"><h2>Hero</h2></div>',
       '<div class="col-md-6">',
         SpreeCmsUploader.getHtmlTemplate('background', "Background image"),
       '</div><div class="col-md-6">',
