@@ -1,4 +1,4 @@
-class InitSpreeCms < ActiveRecord::Migration
+class InitSpreeCms < ActiveRecord::Migration[5.1]
   def change
     create_table "spree_pages", force: :cascade do |t|
       t.string   "title"

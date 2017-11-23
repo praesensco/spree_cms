@@ -1,4 +1,4 @@
-class AddFileTypeToSpreeAssets < ActiveRecord::Migration
+class AddFileTypeToSpreeAssets < ActiveRecord::Migration[5.1]
   def up
     add_column :spree_assets, :file_type, :string
   end
