@@ -4,6 +4,7 @@ end
 
 Spree::Core::Engine.add_routes do
   namespace :admin, path: Spree.admin_path do
+    resources :cms_blocks
     resources :pages
     post 'upload' => 'upload#upload'
   end

@@ -23,6 +23,10 @@ en:
         one: Page
         other: Pages
   spree:
+    spree:
+      admin:
+        tab:
+          blocks: Blocks
     static_content:
       link: Link
       new_page: New page
