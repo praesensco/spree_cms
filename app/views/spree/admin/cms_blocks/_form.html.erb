@@ -2,7 +2,12 @@
   <%= button_link_to Spree.t(:back_to_resource_list, resource: plural_resource_name(Spree::CmsBlock)), spree.admin_cms_blocks_path, icon: 'arrow-left', class: 'btn-primary' %>
 <% end %>
 
-<%= form_for [:admin, @cms_block], data: { cms_block_id: @cms_block.id, asset_host: Rails.configuration.asset_host} do |f| %>
+<%= form_for [:admin, @cms_block],
+             data: {
+               cms_block_id: @cms_block.id,
+               asset_host: Rails.configuration.asset_host
+             } do |f| %>
+  <%= hidden_field_tag 'page[layout]', 'block' %>
   <div class="row" data-hook="admin_cms_block_form_fields">
     <div class="col-md-6" data-hook="admin_cms_block_form_left">
       <div class="form-group">
