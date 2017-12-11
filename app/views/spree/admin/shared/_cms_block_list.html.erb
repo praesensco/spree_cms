@@ -1,0 +1,3 @@
+<%= javascript_tag do -%>
+  var availableCmsBlocks = <%=raw JSON.pretty_generate(Spree::CmsBlock.all.map { |b| { label: b.title, value: b.id } }) %>;
+<% end %>

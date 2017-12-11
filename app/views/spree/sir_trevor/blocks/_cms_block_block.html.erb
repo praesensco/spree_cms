@@ -1,0 +1,13 @@
+<%
+  # cms_block_block - Item added to a CMS page, allowing to inject a CMS Block into it
+  # cms_block - CMS Block object
+  # block - a renderable sir_trevor block
+%>
+<% if cms_block_block[:block_id].present? %>
+  <% cms_block = Spree::CmsBlock.find_by(id: cms_block_block[:block_id]) %>
+  <% if cms_block.present? %>
+    <% cms_block.blocks.each do |block| %>
+      <%= render block %>
+    <% end %>
+  <% end %>
+<% end %>
