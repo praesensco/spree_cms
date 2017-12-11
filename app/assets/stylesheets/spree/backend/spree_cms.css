@@ -237,7 +237,9 @@ the installer will append this file to the app vendored assets here: 'vendor/ass
   padding: 1.2em 0; }
 
 .st-block-controls--active {
-  display: block; }
+  display: block;
+  text-align: left;
+  padding-left: 30px; }
 
 .st-block-control {
   font-size: 1.125em;
@@ -246,12 +248,16 @@ the installer will append this file to the app vendored assets here: 'vendor/ass
   margin: 0 1em 0 0; }
 
 .st-block-control .st-icon {
-  font-size: 2.25em;
-  margin: 0 0 .2em 0;
-  display: block; }
+  display: none; }
 
 .st-block-control:hover {
   color: #34e0c2; }
+
+.st-block-controls--active .st-block-control {
+  width: 100%;
+  line-height: 24px;
+  font-size: 16px;
+}
 
 .st-block {
   padding: 0;

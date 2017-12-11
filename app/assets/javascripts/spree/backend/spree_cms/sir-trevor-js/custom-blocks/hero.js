@@ -1,4 +1,4 @@
-SirTrevor.Blocks.Hero = SirTrevor.Block.extend({
+SirTrevor.Blocks.Hero = SirTrevor.Blocks.Abstract.extend({
   type: 'hero',
   title: 'Hero',
   blockHtml: _.template([
@@ -14,34 +14,6 @@ SirTrevor.Blocks.Hero = SirTrevor.Block.extend({
         SpreeCmsForm.getInputTemplate('url', 'URL'),
       '</div>',
       '<input class="js-state" type="hidden" name="state" value="<%- state || "" %>">',
-      '<input class="js-title" type="hidden" name="title" value="<%= data.title %>">',
     '</div>',
-  ].join("\n")),
-  uploadable: true,
-  loadData: function(data) {
-    var renderedHtml = this.blockHtml({
-      data: data,
-      state: 'edited'
-    });
-
-    this.$editor.html(renderedHtml).show();
-    SpreeCmsUploader.bindUploaders(this);
-  },
-
-  onBlockRender: function() {
-    var state = this.$editor.find("input[name='state']").val();
-    if (typeof state === 'undefined' || state != 'edited') {
-      this.loadData({});
-    }
-  },
-
-  _serializeData: function() {
-    var dataObj = {};
-    this.$editor.find('.js-scms-value').each(function(_i, element) {
-      dataObj[element.getAttribute('name')] = SpreeCmsForm.readValue(element);
-    });
-
-    dataObj.images = SpreeCmsUploader.gatherImages(this);
-    this.setData(dataObj);
-  }
+  ].join("\n"))
 });
