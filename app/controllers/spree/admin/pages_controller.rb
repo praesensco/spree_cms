@@ -32,10 +32,11 @@ module Spree
         image_ids_to_delete = @page.image_ids
         @page.body.to_a.each do |block|
           next if block.images.nil?
-          block.images.each_value do |_, images_by_type|
-            images_by_type.each_value do |_, image|
+
+          block.images.each_value do |images_by_type|
+            images_by_type.each_value do |image|
               if image[:id].nil?
-                image.each_value do |_, image_element|
+                image.each_value do |image_element|
                   next if image_element[:id].blank?
                   image_ids_to_delete -= [image_element[:id].to_i]
                 end
