@@ -7,6 +7,7 @@
                pageid: @page.id,
                asset_host:  Rails.configuration.asset_host
              } do |f| %>
+  <%= f.hidden_field :category, value: @page.persisted? ? @page.category : (@category || :page) %>
   <div class="row" data-hook="admin_page_form_fields">
     <div class="col-md-6" data-hook="admin_page_form_left">
       <div class="form-group">

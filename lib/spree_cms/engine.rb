@@ -4,7 +4,7 @@ module SpreeCms
     isolate_namespace Spree
     engine_name 'spree_cms'
 
-    paths["app/helpers"]
+    paths['app/helpers']
 
     # use rspec for tests
     config.generators do |g|
@@ -17,6 +17,6 @@ module SpreeCms
       end
     end
 
-    config.to_prepare &method(:activate).to_proc
+    config.to_prepare(&method(:activate).to_proc)
   end
 end

@@ -17,11 +17,11 @@ Gem::Specification.new do |s|
   s.homepage      = "http://praesens.co/"
   s.license = 'BSD-3'
 
-  s.files       = `git ls-files`.split("\n")
+  s.files = `git ls-files`.split("\n")
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '~> 3.3.0'
+  s.add_dependency 'spree_core', '>= 3.1.0', '< 4.0'
   s.add_dependency 'sir_trevor_rails', '~> 0'
 
   s.add_development_dependency 'capybara', '~> 2.6'
@@ -34,5 +34,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'selenium-webdriver'
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'sqlite3'
-
 end

@@ -4,7 +4,8 @@ class Spree::Page < Spree::Base
   default_scope { order(position: :asc) }
 
   has_and_belongs_to_many :stores, join_table: 'spree_pages_stores'
-  has_many :images, -> { order(:position) }, as: :viewable, dependent: :destroy, class_name: "Spree::CmsImage"
+  has_many :images, -> { order(:position) },
+           as: :viewable, dependent: :destroy, class_name: 'Spree::CmsImage'
 
   validates :title, presence: true
   validates :slug, presence: true, if: :not_using_foreign_link?
@@ -16,6 +17,9 @@ class Spree::Page < Spree::Base
   scope :header_links, -> { where(show_in_header: true).visible }
   scope :footer_links, -> { where(show_in_footer: true).visible }
   scope :sidebar_links, -> { where(show_in_sidebar: true).visible }
+
+  # Base category scope
+  scope :page, -> { where(category: [:page, nil, '']) }
 
   scope :by_store, ->(store) { joins(:stores).where('spree_pages_stores.store_id = ?', store) }
 

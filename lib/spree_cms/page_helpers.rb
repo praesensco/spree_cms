@@ -9,7 +9,7 @@ module SpreeCms
       lookup_context.find_all(partial_path, [], true).any?
     end
 
-    def cms_asset(image_definition, size)
+    def cms_asset(image_definition, _size)
       Spree::CmsImage.where(id: image_definition[:id]).first
     end
 
