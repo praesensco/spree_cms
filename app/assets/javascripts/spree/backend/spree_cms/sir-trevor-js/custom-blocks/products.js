@@ -49,7 +49,7 @@ SirTrevor.Blocks.Products = SirTrevor.Blocks.Abstract.extend({
   },
 
   loadData: function(data) {
-    data.products = data.products.split(',');
+    data.products = data.products ? data.products.split(',') : [];
     var renderedHtml = this.blockHtml({
       data: data,
       state: 'edited',
@@ -65,9 +65,14 @@ SirTrevor.Blocks.Products = SirTrevor.Blocks.Abstract.extend({
   onSkuAdd: function(ev) {
     ev.preventDefault();
     var sku = this.getData().data.new_sku;
+    if (!sku) {
+      return false;
+    }
+
     var productList = this.getProductList();
     if (productList.indexOf(sku) == -1) {
       productList.push(sku);
+      this.$editor.find('[name="new_sku"]').val('');
       this.getProductListInput().val(productList.join(','));
       this.reRenderProductList();
     }
