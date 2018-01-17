@@ -1,7 +1,7 @@
 SirTrevor.Blocks.TaxonProducts = SirTrevor.Block.extend({
   type: 'taxon_products',
   title: 'Products by Taxon',
-  blockHtml: _.template([
+  blockHtml: _.template(
     `<div class="row">
       <div class="col-md-12"><h2>Products by Taxon</h2></div>
       <div class="col-md-6">
