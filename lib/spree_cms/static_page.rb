@@ -10,7 +10,11 @@ end
 module Spree
   class StaticPage
     def self.matches?(request)
-      return false if request.path =~ %r{\A\/+(admin|account|cart|checkout|content|login|pg\/|orders|products|s\/|session|signup|shipments|states|t\/|tax_categories|user)+}
+      request_match = request.path =~ %r{
+        \A\/+
+        (admin|account|cart|checkout|content|login|pg\/|orders|products|s\/|session|signup|shipments|states|t\/|tax_categories|user)+
+      }x
+      return false if request_match
       !Spree::Page.visible.find_by_slug(request.path).nil?
     end
   end

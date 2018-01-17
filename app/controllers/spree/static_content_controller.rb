@@ -8,7 +8,8 @@ module Spree
     def show
       # handle wildcard (*-*) for page slug
       path = request.path.gsub(/(-.*)/, '')
-      @page = Spree::Page.by_store(current_store).visible.find_by_slug(request.path) || Spree::Page.by_store(current_store).visible.find_by_slug!(path)
+      @page = Spree::Page.by_store(current_store).visible.find_by_slug(request.path) ||
+        Spree::Page.by_store(current_store).visible.find_by_slug!(path)
     end
 
     private

@@ -1,3 +1,4 @@
+<% page_category = @page.persisted? ? @page.category : (@category || 'page') %>
 <% content_for :page_actions do %>
   <%= button_link_to Spree.t(:back_to_resource_list, resource: plural_resource_name(Spree::Page)), spree.admin_pages_path, icon: 'arrow-left', class: 'btn-primary' %>
 <% end %>
@@ -7,6 +8,7 @@
                pageid: @page.id,
                asset_host:  Rails.configuration.asset_host
              } do |f| %>
+  <%= f.hidden_field :category, value: page_category %>
   <div class="row" data-hook="admin_page_form_fields">
     <div class="col-md-6" data-hook="admin_page_form_left">
       <div class="form-group">
@@ -40,8 +42,9 @@
       </div>
     </div>
 
-    <% options = options_for_select(SpreeCms.configuration.layouts.map { |title, key| [key, title] },
-                                    selected: @page.layout) %>
+    <% layouts = SpreeCms.configuration.layouts[page_category] %>
+    <% options = options_for_select(layouts.map { |title, key| [key, title] },
+                                    selected: @page.layout || (layouts.first if layouts.size == 1) ) %>
     <div class="col-md-6" data-hook="admin_page_form_right">
       <div class="form-group">
         <%= f.label :layout %>
@@ -50,34 +53,8 @@
       </div>
 
       <div class="form-group">
-        <%= f.label :foreign_link %>
-        <%= f.text_field :foreign_link, class: 'form-control' %>
-      </div>
-
-      <div class="form-group">
         <%= f.label :position %>
         <%= f.number_field :position, min: 0, class: 'form-control' %>
-      </div>
-
-      <!--<div class="checkbox">-->
-        <!--<%= f.label :show_in_sidebar do %>-->
-          <!--<%= f.check_box :show_in_sidebar %>-->
-          <!--<%= Spree::Page.human_attribute_name(:show_in_sidebar) %>-->
-        <!--<% end %>-->
-      <!--</div>-->
-
-      <div class="checkbox">
-        <%= f.label :show_in_header do %>
-          <%= f.check_box :show_in_header %>
-          <%= Spree::Page.human_attribute_name(:show_in_header) %>
-        <% end %>
-      </div>
-
-      <div class="checkbox">
-        <%= f.label :show_in_footer do %>
-          <%= f.check_box :show_in_footer %>
-          <%= Spree::Page.human_attribute_name(:show_in_footer) %>
-        <% end %>
       </div>
 
       <div class="checkbox">
@@ -86,13 +63,6 @@
           <%= Spree::Page.human_attribute_name(:visible) %>
         <% end %>
       </div>
-
-      <!--<div class="checkbox">-->
-        <!--<%= f.label :render_layout_as_partial do %>-->
-          <!--<%= f.check_box :render_layout_as_partial %>-->
-          <!--<%= Spree::Page.human_attribute_name(:render_layout_as_partial) %>-->
-        <!--<% end %>-->
-      <!--</div>-->
 
       <div class="form-group">
         <%= f.label :stores, plural_resource_name(Spree::Store) %>
@@ -112,7 +82,7 @@
     <div class="col-xs-12">
       <div class="form-group">
         <%= f.label :content %>
-        <%= f.text_area :body, rows: 12, class: 'form-control js-st-instance' %>
+        <%= f.text_area :body, rows: 12, class: 'form-control js-st-instance', data: { category: page_category } %>
         <%= f.error_message_on :body %>
       </div>
     </div>

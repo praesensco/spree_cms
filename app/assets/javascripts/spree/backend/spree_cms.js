@@ -13,6 +13,7 @@
 //= require spree/backend/spree_cms/sir-trevor-js/custom-blocks/hero
 //= require spree/backend/spree_cms/sir-trevor-js/custom-blocks/newsletter
 //= require spree/backend/spree_cms/sir-trevor-js/custom-blocks/plain
+//= require spree/backend/spree_cms/sir-trevor-js/custom-blocks/products
 //= require spree/backend/spree_cms/sir-trevor-js/custom-blocks/shop_by_category
 //= require spree/backend/spree_cms/sir-trevor-js/custom-blocks/taxon_products
 //= require spree/backend/spree_cms/initialize

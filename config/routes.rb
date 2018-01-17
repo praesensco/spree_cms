@@ -5,7 +5,14 @@ end
 Spree::Core::Engine.add_routes do
   namespace :admin, path: Spree.admin_path do
     resources :cms_blocks
-    resources :pages
+    resources :pages do
+      collection do
+        get '/category/:category' => 'pages#index'
+        get '/category/:category/new' => 'pages#new'
+        get '/category/:category/:id/edit' => 'pages#edit'
+      end
+    end
+
     post 'upload' => 'upload#upload'
   end
   constraints(Spree::StaticPage) do

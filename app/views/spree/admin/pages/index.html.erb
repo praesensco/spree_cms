@@ -1,9 +1,9 @@
 <% content_for :page_title do %>
-  <%= plural_resource_name(Spree::Page) %>
+  <%= Spree.t(@category.pluralize) %>
 <% end %>
 
 <% content_for :page_actions do %>
-  <%= button_link_to Spree.t(:new_page, scope: :static_content), new_object_url, icon: 'plus', class: 'btn-primary', id: 'admin_new_page' %>
+  <%= button_link_to Spree.t(:new_page, scope: :static_content), "/admin/pages/category/#{@category}/new", icon: 'plus', class: 'btn-primary', id: 'admin_new_page' %>
 <% end %>
 
 <% if @pages.any? %>
@@ -42,6 +42,6 @@
 <% else %>
   <div class="alert alert-warning no-objects-found">
     <%= Spree.t(:no_resource_found, resource: Spree::Page.model_name.human) %>,
-    <%= link_to Spree.t(:add_one), spree.new_admin_page_path %>!
+    <%= link_to Spree.t(:add_one), "/admin/pages/category/#{@category}/new" %>!
   </div>
 <% end %>
