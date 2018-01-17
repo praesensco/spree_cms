@@ -24,6 +24,17 @@
 
     <div class="col-md-6" data-hook="admin_cms_block_form_right">
       <div class="form-group">
+        <%= f.label :group %>
+        <%= f.select :group,
+                     options_for_select(
+                       SpreeCms.configuration.cms_block_groups.map { |key, h| [h[:name], key] },
+                       f.object.group
+                     ),
+                     { include_blank: true },
+                     class: :select2 %>
+        <%= f.error_message_on :group %>
+      </div>
+      <div class="form-group">
         <%= f.label :stores, plural_resource_name(Spree::Store) %>
         <% Spree::Store.all.each do |store| %>
           <div class="checkbox">

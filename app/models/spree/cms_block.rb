@@ -5,9 +5,18 @@ class Spree::CmsBlock < Spree::Base
   has_many :images, -> { order(:position) }, as: :viewable, dependent: :destroy, class_name: 'Spree::CmsImage'
 
   scope :by_store, ->(store) { joins(:stores).where('spree_cms_blocks_stores.store_id = ?', store) }
+  scope :by_group, ->(group) { where(group: group) }
 
   validates :title, presence: true
   validates :slug, presence: true, uniqueness: true
+
+  has_many :cms_block_owners
+
+  def position_for_owner(owner)
+    cms_block_owner = cms_block_owners.find_by(owner: owner)
+    return unless cms_block_owner
+    cms_block_owner.position
+  end
 
   def blocks(type = nil)
     return body.to_a if type.nil?

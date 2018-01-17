@@ -7,9 +7,11 @@ require 'spree_cms/static_page'
 module SpreeCms
   class Configuration
     attr_accessor :layouts
+    attr_accessor :cms_block_groups
 
     def initialize
       @layouts = []
+      @cms_block_groups = {}
     end
   end
 

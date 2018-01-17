@@ -1,0 +1,43 @@
+<% blocks = Spree::CmsBlock.by_group(group) %>
+<% multiple = SpreeCms.configuration.cms_block_groups[group][:multiple] %>
+<% selected = f.object.cms_blocks_by_group(group) %>
+<% use_positions = multiple && SpreeCms.configuration.cms_block_groups[group][:positions] %>
+<% select_class = 'js-cmsBlockWithPositions' if use_positions %>
+
+<%= f.field_container "cms_blocks_group_#{group}", class: ['form-group'] do %>
+  <%= label_tag SpreeCms.configuration.cms_block_groups[group][:name] %>
+  <%= select_tag 'cms_blocks[]',
+                 options_for_select(
+                   blocks.map { |b| [b.title, b.id] },
+                   (selected.map(&:id) if selected.present?)
+                 ),
+                 class: [:select2, select_class],
+                 data: { 'block-group-table-selector' => ".js-#{group}-#{f.object.id}" },
+                 include_blank: '',
+                 multiple: multiple %>
+<% end %>
+
+<% if use_positions %>
+  <div class="row">
+    <div class="col-md-6">
+        <table class="table <%= "js-#{group}-#{f.object.id}" %>">
+          <thead>
+            <tr>
+              <th>CMS Block</th>
+              <th>Position</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% selected.each do |cms_block| %>
+              <tr data-block-id="<%= cms_block.id %>">
+                <td><%= cms_block.title %></td>
+                <td><input type="text"
+                           name="cms_block_positions[<%= cms_block.id %>]"
+                           value="<%= cms_block.position_for_owner(f.object) %>" /></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+    </div>
+  </div>
+<% end %>
