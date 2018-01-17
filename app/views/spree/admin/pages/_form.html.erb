@@ -2,7 +2,11 @@
   <%= button_link_to Spree.t(:back_to_resource_list, resource: plural_resource_name(Spree::Page)), spree.admin_pages_path, icon: 'arrow-left', class: 'btn-primary' %>
 <% end %>
 
-<%= form_for [:admin, resource], data: { pageid: @page.id, asset_host:  Rails.configuration.asset_host} do |f| %>
+<%= form_for [:admin, resource],
+             data: {
+               pageid: @page.id,
+               asset_host:  Rails.configuration.asset_host
+             } do |f| %>
   <div class="row" data-hook="admin_page_form_fields">
     <div class="col-md-6" data-hook="admin_page_form_left">
       <div class="form-group">
@@ -36,10 +40,13 @@
       </div>
     </div>
 
+    <% options = options_for_select(SpreeCms.configuration.layouts.map { |title, key| [key, title] },
+                                    selected: @page.layout) %>
     <div class="col-md-6" data-hook="admin_page_form_right">
       <div class="form-group">
         <%= f.label :layout %>
-        <%= select_tag 'page[layout]', options_for_select(Spree::Page::LAYOUTS, selected: @page.layout), { id: 'page_layout', include_blank: 'Select layout',class: 'select2' } %>
+        <%= select_tag 'page[layout]', options,
+             { id: 'page_layout', include_blank: 'Select layout', class: 'select2' } %>
       </div>
 
       <div class="form-group">

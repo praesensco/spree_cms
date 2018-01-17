@@ -3,7 +3,7 @@ SirTrevor.Blocks.Textarea = SirTrevor.Block.extend({
   title: 'Plain Text/HTML',
   icon_name: 'text',
   blockHtml: _.template([
-    '<h2 class="st-block__editor--title">Plain text/HTML</h2>',
+    '<div class="col-md-12"><h2 class="st-block__editor--title">Plain text/HTML</h2></div>',
     '<div class="js-grid">',
     '<textarea class="st-block__ui-modal-input" placeholder="Content" name="content" style="margin: 10px; width: 100%; height: 200px;"><%- data.global.content || "" %></textarea>',
     '<input type="hidden" name="state" value="<%- state || "" %>">',

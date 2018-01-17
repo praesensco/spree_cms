@@ -1,4 +1,4 @@
-class Spree::Page < ActiveRecord::Base
+class Spree::Page < Spree::Base
   sir_trevor_content :body
 
   default_scope { order(position: :asc) }
@@ -18,17 +18,6 @@ class Spree::Page < ActiveRecord::Base
   scope :sidebar_links, -> { where(show_in_sidebar: true).visible }
 
   scope :by_store, ->(store) { joins(:stores).where('spree_pages_stores.store_id = ?', store) }
-
-  LAYOUTS = [
-    ['About', 'about'],
-    ['Contact', 'contact'],
-    ['Delivery', 'delivery'],
-    ['FAQ', 'faq'],
-    ['Home page', 'home-page'],
-    ['Privacy', 'privacy'],
-    ['Support', 'support'],
-    ['Terms and Conditions', 'terms_and_conditions']
-  ]
 
   before_save :update_positions_and_slug
 

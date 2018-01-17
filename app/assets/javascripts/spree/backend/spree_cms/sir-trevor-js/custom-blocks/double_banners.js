@@ -3,7 +3,7 @@ SirTrevor.Blocks.DoubleBanners = SirTrevor.Block.extend({
   title: 'Double Banners',
   blockHtml: _.template([
     '<div class="row">',
-      '<h2 class="sst__title">Double Banners</h2>',
+      '<div class="col-md-12"><h2>Double Banners</h2></div>',
       '<input class="js-state" type="hidden" name="state" value="<%- state || "" %>">',
     '</div><div class="row">',
       '<div class="sst__subtitle">Circle elements</div>',

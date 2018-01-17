@@ -1,3 +1,8 @@
+////////////////////////////
+// Example initializer file
+// Place it within final application and customize
+//
+/*
 $(document).ready(function() {
   var $sirTrevorEditor = $('.js-st-instance');
   if (!$sirTrevorEditor.length) {
@@ -12,7 +17,7 @@ $(document).ready(function() {
     uploadUrl: '/admin/upload'
   });
 
-  if (layout === 'home-page') {
+  if (layout === 'homepage') {
     sirTrevorDefaults = $.extend(sirTrevorDefaults, {
       blockTypes: [
         'BannerRow',
@@ -39,3 +44,4 @@ $(document).ready(function() {
 
   new SirTrevor.Editor(sirTrevorDefaults);
 });
+*/

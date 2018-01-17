@@ -3,7 +3,7 @@ SirTrevor.Blocks.ShopByCategory = SirTrevor.Block.extend({
   title: 'Shop By Category',
   blockHtml: _.template([
     '<div class="row">',
-      '<h2 class="sst__title">Shop By Category</h2>',
+      '<div class="col-md-12"><h2>Shop By Category</h2></div>',
       '<input class="js-state" type="hidden" name="state" value="<%- state || "" %>">',
       SpreeCmsForm.getInputTemplate('heading', 'Heading'),
     '</div><div class="row">',

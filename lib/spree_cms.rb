@@ -2,21 +2,23 @@ require 'spree_core'
 require 'spree_cms/engine'
 require 'spree_cms/railtie'
 require 'sir_trevor_rails'
+require 'spree_cms/static_page'
 
-module StaticPage
-  module_function
+module SpreeCms
+  class Configuration
+    attr_accessor :layouts
 
-  def remove_spree_mount_point(path)
-    regex = Regexp.new '\A' + Rails.application.routes.url_helpers.spree_path
-    path.sub(regex, '').split('?')[0]
+    def initialize
+      @layouts = []
+    end
   end
-end
 
-module Spree
-  class StaticPage
-    def self.matches?(request)
-      return false if request.path =~ %r{\A\/+(admin|account|cart|checkout|content|login|pg\/|orders|products|s\/|session|signup|shipments|states|t\/|tax_categories|user)+}
-      !Spree::Page.visible.find_by_slug(request.path).nil?
+  class << self
+    attr_accessor :configuration
+
+    def configure
+      self.configuration ||= Configuration.new
+      yield(configuration)
     end
   end
 end

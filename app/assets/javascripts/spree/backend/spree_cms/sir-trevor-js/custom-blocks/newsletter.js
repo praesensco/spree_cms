@@ -3,7 +3,7 @@ SirTrevor.Blocks.Newsletter = SirTrevor.Block.extend({
   title: 'Newsletter',
   blockHtml: _.template([
     '<div class="row">',
-      '<h2 class="sst__title">Newsletter</h2>',
+      '<div class="col-md-12"><h2>Newsletter</h2></div>',
       '<input class="js-state" type="hidden" name="state" value="<%- state || "" %>">',
       SpreeCmsForm.getInputTemplate('heading', 'Heading'),
     '</div><div class="row">',

@@ -3,7 +3,7 @@ SirTrevor.Blocks.TaxonProducts = SirTrevor.Block.extend({
   title: 'Products by Taxon',
   blockHtml: _.template([
     '<div class="row">',
-      '<h2 class="sst__title">Products by Taxon</h2>',
+      '<div class="col-md-12"><h2>Products by Taxon</h2></div>',
       '<div class="col-md-6">',
         SpreeCmsUploader.getHtmlTemplate('heading_icon', "Icon", false, ['icon']),
         SpreeCmsForm.getInputTemplate('heading', 'Heading'),
