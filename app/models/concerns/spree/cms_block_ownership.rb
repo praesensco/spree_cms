@@ -5,6 +5,10 @@ module Spree
       has_many :cms_block_owners, as: :owner
       has_many :cms_blocks, through: :cms_block_owners
 
+      def cms_block_by_group(group)
+        cms_blocks_by_group(group).first
+      end
+
       def cms_blocks_by_group(group)
         return [] if cms_blocks_group_hash[group].blank?
         cms_blocks_group_hash[group]

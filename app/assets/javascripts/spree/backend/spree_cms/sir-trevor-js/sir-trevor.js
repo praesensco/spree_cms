@@ -4639,10 +4639,16 @@ module.exports = function(block, file, success, error) {
 
   var uid  = [block.blockID, (new Date()).getTime(), 'raw'].join('-');
   var data = new FormData();
-  var form = document.querySelector('.edit_page[data-pageid]');
+  var form;
 
+  form = document.querySelector('.edit_page[data-pageid]');
   if (form) {
     data.append('attachment[page]', form.getAttribute('data-pageid'));
+  } else {
+    form = document.querySelector('.edit_cms_block[data-cmsblockid] ');
+    if (form) {
+      data.append('attachment[cmsblock]', form.getAttribute('data-cmsblockid'));  
+    }
   }
   data.append('attachment[name]', file.name);
   data.append('attachment[file]', file);

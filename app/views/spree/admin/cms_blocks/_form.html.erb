@@ -4,7 +4,7 @@
 
 <%= form_for [:admin, @cms_block],
              data: {
-               cms_block_id: @cms_block.id,
+               cmsblockid: @cms_block.id,
                asset_host: Rails.configuration.asset_host
              } do |f| %>
   <%= hidden_field_tag 'page[layout]', 'block' %>

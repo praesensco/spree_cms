@@ -8,27 +8,28 @@ module Spree
       private
 
       def process_image_upload
-        page = Spree::Page.find_by(id: params[:attachment][:page])
+        resource = if params[:attachment][:page].present?
+                     Spree::Page.find_by(id: params[:attachment][:page])
+                   elsif params[:attachment][:cmsblock].present?
+                     Spree::CmsBlock.find_by(id: params[:attachment][:cmsblock])
+                   end
+        return { success: false, file: {} } if resource.blank?
 
-        if page.present?
-          image = CmsImage.create!(
-            file_type: params[:attachment][:block_type],
-            attachment: params[:attachment][:file]
-          )
-          page.images.push(image)
-          page.save
+        image = CmsImage.create!(
+          file_type: params[:attachment][:block_type],
+          attachment: params[:attachment][:file]
+        )
+        resource.images.push(image)
+        resource.save
 
-          {
-            success: true,
-            file: {
-              id: image.id,
-              url: image.attachment.url(:original),
-              filename: image.attachment_file_name
-            }
+        {
+          success: true,
+          file: {
+            id: image.id,
+            url: image.attachment.url(:original),
+            filename: image.attachment_file_name
           }
-        else
-          { success: false }
-        end
+        }
       end
     end
   end
