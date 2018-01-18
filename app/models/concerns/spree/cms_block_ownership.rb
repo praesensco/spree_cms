@@ -14,6 +14,11 @@ module Spree
         cms_blocks_group_hash[group]
       end
 
+      def cms_blocks_by_group_with_positions(group)
+        cms_blocks_by_group(group).
+          map { |b| [b.position_for_owner(self), b] }.to_h
+      end
+
       def cms_block_groups
         cms_blocks_group_hash.keys.uniq
       end
