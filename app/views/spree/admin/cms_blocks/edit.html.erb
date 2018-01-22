@@ -1,5 +1,5 @@
 <% content_for :page_title do %>
-  <%= Spree.t(:editing_resource, resource: Spree::CmsBlock.model_name.human) %>
+  <%= Spree.t(:editing_resource, resource: Spree::CmsBlock.model_name.human.titleize) %>
 <% end %>
 
 <%= render 'form', resource: @cms_block %>
