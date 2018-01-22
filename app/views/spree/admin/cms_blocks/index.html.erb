@@ -6,18 +6,44 @@
   <%= button_link_to Spree.t(:new_cms_block, scope: :static_content), new_object_url, icon: 'plus', class: 'btn-primary', id: 'admin_new_cms_block' %>
 <% end %>
 
+<% content_for :table_filter do %>
+  <div data-hook="admin_cms_blocks_index_search">
+    <%= search_form_for [:admin, @search] do |f| %>
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+          <div class="form-group">
+            <%= f.label :title_cont, Spree.t(:title) %>
+            <%= f.text_field :title_cont, value: @selected_cms_blocks_title_cont, size: 15, class: "form-control js-quick-search-target" %>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <div class="form-group">
+            <%= label_tag :group_eq, Spree.t(:group) %>
+            <%= f.select :group_eq,
+                         options_for_cms_blocks_group_select(@selected_cms_blocks_group_eq),
+                         { include_blank: true },
+                         class: 'select2 js-filterable' %>
+          </div>
+        </div>
+      </div>
+      <div data-hook="admin_cms_blocks_index_search_buttons" class="form-actions">
+        <%= button Spree.t(:filter_results), 'search' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+
 <% if @cms_blocks.any? %>
   <table class="table" id="listing_pages" data-hook>
     <colgroup>
-      <col style="width: 40%">
+      <col style="width: 50%">
       <col style="width: 30%">
-      <col style="width: 15%">
-      <col style="width: 15%">
+      <col style="width: 20%">
     </colgroup>
     <thead>
       <tr data-hook="admin_pages_index_headers">
         <th><%= Spree::CmsBlock.human_attribute_name(:title) %></th>
-        <th><%= Spree::CmsBlock.human_attribute_name(:slug) %></th>
         <th><%= Spree::CmsBlock.human_attribute_name(:group) %></th>
         <th data-hook="admin_cms_blocks_index_header_actions" class="actions"></th>
       </tr>
@@ -27,7 +53,6 @@
         <% group = SpreeCms.configuration.cms_block_groups[cms_block.group] %>
         <tr data-hook="admin_cms_blocks_index_rows" class="<%= cycle('odd', 'even') %>" id="<%= dom_id cms_block %>">
           <td><%= cms_block.title %></td>
-          <td><%= cms_block.slug %></td>
           <td><%= group[:name] if group.present? %></td>
           <td class="actions text-right" data-hook="admin_cms_blocks_index_row_actions">
             <%= link_to_edit cms_block, no_text: true %>
@@ -37,9 +62,10 @@
       <% end %>
     </tbody>
   </table>
+
+  <%= paginate @collection %>
 <% else %>
   <div class="alert alert-warning no-objects-found">
-    <%= Spree.t(:no_resource_found, resource: Spree::CmsBlock.model_name.human) %>,
-    <%= link_to Spree.t(:add_one), spree.new_admin_cms_block_path %>!
+    <%= Spree.t(:no_resource_found, resource: Spree::CmsBlock.model_name.human.titleize.pluralize) %>,
   </div>
 <% end %>
