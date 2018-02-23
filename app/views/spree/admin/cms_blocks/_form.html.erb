@@ -35,15 +35,17 @@
     </div>
   </div>
 
-  <div class="row" data-hook="admin_cms_block_form_meta">
-    <div class="col-xs-12">
-      <div class="form-group">
-        <%= f.label :content %>
-        <%= f.text_area :body, rows: 12, class: 'form-control js-st-instance' %>
-        <%= f.error_message_on :body %>
+  <% if f.object.persisted? %>
+    <div class="row" data-hook="admin_cms_block_form_meta">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <%= f.label :content %>
+          <%= f.text_area :body, rows: 12, class: 'form-control js-st-instance' %>
+          <%= f.error_message_on :body %>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
 
   <div class="row" data-hook="admin_cms_block_form_additional_fields">
     <div class="col-md-12"></div>
