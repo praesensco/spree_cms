@@ -8,7 +8,7 @@ module Spree
       protected
 
       def location_after_save
-        edit_admin_cms_block_path
+        edit_admin_cms_block_path @cms_block
       end
 
       private

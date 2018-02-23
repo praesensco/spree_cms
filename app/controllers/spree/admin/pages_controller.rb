@@ -11,7 +11,7 @@ module Spree
       protected
 
       def location_after_save
-        edit_admin_page_path
+        edit_admin_page_path @page
       end
 
       private

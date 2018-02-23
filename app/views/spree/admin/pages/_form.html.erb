@@ -47,9 +47,10 @@
                                     selected: @page.layout || (layouts.first if layouts.size == 1) ) %>
     <div class="col-md-6" data-hook="admin_page_form_right">
       <div class="form-group">
-        <%= f.label :layout %>
+        <%= f.label :layout %> <span class="required">*</span>
         <%= select_tag 'page[layout]', options,
              { id: 'page_layout', include_blank: 'Select layout', class: 'select2' } %>
+        <%= f.error_message_on :layout %>
       </div>
 
       <div class="form-group">
@@ -78,15 +79,17 @@
     </div>
   </div>
 
-  <div class="row" data-hook="admin_page_form_meta">
-    <div class="col-xs-12">
-      <div class="form-group">
-        <%= f.label :content %>
-        <%= f.text_area :body, rows: 12, class: 'form-control js-st-instance', data: { category: page_category } %>
-        <%= f.error_message_on :body %>
+  <% if f.object.persisted? %>
+    <div class="row" data-hook="admin_page_form_meta">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <%= f.label :content %>
+          <%= f.text_area :body, rows: 12, class: 'form-control js-st-instance', data: { category: page_category } %>
+          <%= f.error_message_on :body %>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
 
   <div class="row" data-hook="admin_page_form_additional_fields">
     <div class="col-md-12"></div>
