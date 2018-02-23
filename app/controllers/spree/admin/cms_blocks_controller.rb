@@ -5,6 +5,12 @@ module Spree
         respond_with(@collection)
       end
 
+      protected
+
+      def location_after_save
+        edit_admin_cms_block_path
+      end
+
       private
 
       def collection
@@ -19,6 +25,7 @@ module Spree
         @collection = super
         @search = @collection.ransack(params[:q])
         @collection = @search.result.
+                      order(:title).
                       page(params[:page]).
                       per(Spree::Config[:admin_properties_per_page])
       end

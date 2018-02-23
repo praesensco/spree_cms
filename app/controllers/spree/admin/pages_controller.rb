@@ -11,11 +11,7 @@ module Spree
       protected
 
       def location_after_save
-        if params[:page] && params[:page][:category]
-          "/admin/pages/category/#{params[:page][:category]}"
-        else
-          collection_url
-        end
+        edit_admin_page_path
       end
 
       private
