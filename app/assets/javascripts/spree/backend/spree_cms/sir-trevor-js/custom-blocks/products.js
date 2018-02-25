@@ -68,6 +68,7 @@ SirTrevor.Blocks.Products = SirTrevor.Blocks.Abstract.extend({
     if (!sku) {
       return false;
     }
+    sku = sku.trim();
 
     var productList = this.getProductList();
     if (productList.indexOf(sku) == -1) {
