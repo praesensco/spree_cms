@@ -92,7 +92,7 @@ SirTrevor.Blocks.Products = SirTrevor.Blocks.Abstract.extend({
 
   reRenderProductList() {
     var data = this.getData().data;
-    data.products = $('.js-blockProductsInputProducts').val();
+    data.products = this.$editor.find('.js-blockProductsInputProducts').val();
     this.loadData(data);
   },
 
