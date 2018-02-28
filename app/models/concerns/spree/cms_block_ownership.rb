@@ -6,7 +6,7 @@ module Spree
       has_many :cms_blocks, through: :cms_block_owners
 
       def cms_block_by_group(group)
-        cms_blocks_by_group(group).first
+        cms_blocks_by_group(group).find(&:active)
       end
 
       def cms_blocks_by_group(group)
@@ -24,7 +24,7 @@ module Spree
       end
 
       def cms_blocks_group_hash
-        @cms_blocks_by_group ||= begin
+        @cms_blocks_group_hash ||= begin
           blocks = {}
           cms_blocks.each do |b|
             blocks[b.group] ||= []
