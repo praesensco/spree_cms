@@ -21,6 +21,7 @@ module Spree
           next if param.blank?
           instance_variable_set "@selected_cms_blocks_#{key}", param
         end
+        params[:q][:active_false] = 0 if params[:q][:active_false].nil?
 
         @collection = super
         @search = @collection.ransack(params[:q])

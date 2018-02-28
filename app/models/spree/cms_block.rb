@@ -7,13 +7,15 @@ class Spree::CmsBlock < Spree::Base
 
   scope :by_store, ->(store) { joins(:stores).where('spree_cms_blocks_stores.store_id = ?', store) }
   scope :by_group, ->(group) { where(group: group) }
+  scope :active, -> { where(active: true) }
+  scope :inactive, -> { where(active: false) }
 
   validates :title, presence: true
   validates :slug, uniqueness: true
   before_save :validate_group_assingment
   before_save :create_slug_before_save
 
-  self.whitelisted_ransackable_attributes = ['title', 'group']
+  self.whitelisted_ransackable_attributes = %w[active group title]
 
   def self.default_group_key
     group_key, = SpreeCms.configuration.cms_block_groups.find { |_, h| h[:default] }

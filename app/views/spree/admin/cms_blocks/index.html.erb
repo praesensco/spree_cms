@@ -25,9 +25,17 @@
                          class: 'select2 js-filterable' %>
           </div>
         </div>
+        <div class="col-xs-12 col-md-6">
+          <div class="form-group">
+            <%= label_tag :q_active_false do %>
+              <%= f.check_box :active_false %>
+              <%= Spree.t(:inactive) %>
+            <% end %>
+          </div>
+        </div>
       </div>
       <div data-hook="admin_cms_blocks_index_search_buttons" class="form-actions">
-        <%= button Spree.t(:filter_results), 'search' %>
+        <%= button Spree.t(:filter_results), 'search', {}, data: { 'disable-with' => 'Searching...' } %>
       </div>
     <% end %>
   </div>
@@ -37,14 +45,16 @@
 <% if @cms_blocks.any? %>
   <table class="table" id="listing_pages" data-hook>
     <colgroup>
-      <col style="width: 50%">
+      <col style="width: 40%">
       <col style="width: 30%">
-      <col style="width: 20%">
+      <col style="width: 15%">
+      <col style="width: 15%">
     </colgroup>
     <thead>
       <tr data-hook="admin_pages_index_headers">
         <th><%= Spree::CmsBlock.human_attribute_name(:title) %></th>
         <th><%= Spree::CmsBlock.human_attribute_name(:group) %></th>
+        <th><%= Spree::CmsBlock.human_attribute_name(:active) %></th>
         <th data-hook="admin_cms_blocks_index_header_actions" class="actions"></th>
       </tr>
     </thead>
@@ -54,6 +64,7 @@
         <tr data-hook="admin_cms_blocks_index_rows" class="<%= cycle('odd', 'even') %>" id="<%= dom_id cms_block %>">
           <td><%= cms_block.title %></td>
           <td><%= group[:name] if group.present? %></td>
+          <td><%= content_tag(:i, '', class: 'icon icon-ok') if cms_block.active %></td>
           <td class="actions text-right" data-hook="admin_cms_blocks_index_row_actions">
             <%= link_to_edit cms_block, no_text: true %>
             <%= link_to_delete cms_block, no_text: true %>

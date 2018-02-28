@@ -32,6 +32,13 @@
                      class: :select2 %>
         <%= f.error_message_on :group %>
       </div>
+      <div class="checkbox">
+        <br>
+        <%= f.label :active do %>
+          <%= f.check_box :active %>
+          <%= Spree::CmsBlock.human_attribute_name(:active) %>
+        <% end %>
+      </div>
     </div>
   </div>
 
