@@ -8,8 +8,8 @@ module Spree
         owner = instance_variable_get "@#{params[:controller].split('/').last.singularize}"
         return if owner.blank?
 
-        owner.cms_blocks = []
         if params[:cms_blocks].present?
+          owner.cms_blocks = []
           params[:cms_blocks].each do |cms_block_id|
             cms_block = Spree::CmsBlock.find_by(id: cms_block_id)
             next unless cms_block.present?
