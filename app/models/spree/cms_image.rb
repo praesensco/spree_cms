@@ -23,14 +23,6 @@ module Spree
     }
     after_post_process :find_dimensions
 
-    if Rails.application.secrets.aws_s3_enabled
-      attachment_definitions[:attachment][:url] = ':s3_alias_url'
-      attachment_definitions[:attachment][:s3_host_alias] = Rails.application.secrets.attachments_host || Rails.application.secrets.cdn_host
-    else
-      attachment_definitions[:attachment][:path] = "#{Rails.root}/public/media/cmsimage/:id/:style/:basename.:extension"
-      attachment_definitions[:attachment][:url] = "//#{Rails.application.secrets.cdn_host}/media/cmsimage/:id/:style/:basename.:extension"
-    end
-
     def url(size)
       attachment.url(size, false)
     end
