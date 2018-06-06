@@ -4,19 +4,15 @@ module Spree
 
     validate :no_attachment_errors
 
-    def self.styles_lambda(_attachment)
-      {
-        retina: '2400x>',
-        large: '1800x>',
-        medium: '900x>',
-        small: '500x>',
-        mini: '200x>',
-        icon: '50x>'
-      }
-    end
-
     has_attached_file :attachment,
-                      styles: ->(attachment) { attachment.instance.class.styles_lambda(attachment) },
+                      styles: {
+                        retina: '2400x>',
+                        large: '1800x>',
+                        medium: '900x>',
+                        small: '500x>',
+                        mini: '200x>',
+                        icon: '50x>'
+                      },
                       default_style: :normal,
                       convert_options: { all: '-strip -colorspace sRGB' },
                       processors: %i[thumbnail paperclip_optimizer]
