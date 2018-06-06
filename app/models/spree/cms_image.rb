@@ -14,6 +14,8 @@ module Spree
                         icon: '50x>'
                       },
                       default_style: :normal,
+                      path: 'media/cmsimage/:id/:style/:basename.:extension',
+                      default_url: 'media/cmsimage/:id/:style/:basename.:extension',
                       convert_options: { all: '-strip -colorspace sRGB' },
                       processors: %i[thumbnail paperclip_optimizer]
     validates_attachment :attachment, presence: true, content_type: {
@@ -22,8 +24,6 @@ module Spree
     after_post_process :find_dimensions
 
     if Rails.application.secrets.aws_s3_enabled
-      attachment_definitions[:attachment][:path] = '/media/cmsimage/:id/:style/:basename.:extension'
-      attachment_definitions[:attachment][:default_url] = '/media/cmsimage/:id/:style/:basename.:extension'
       attachment_definitions[:attachment][:url] = ':s3_alias_url'
       attachment_definitions[:attachment][:s3_host_alias] = Rails.application.secrets.attachments_host || Rails.application.secrets.cdn_host
     else
